@@ -1,0 +1,30 @@
+[server]
+enableStaticServing = false
+[client]
+showSidebarNavigation = false
+
+[[theme.fontFaces]]
+family = "Geist"
+url = "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
+style = "normal"
+
+[[theme.fontFaces]]
+family = "GeistMono"
+url = "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
+style = "normal"
+
+
+[[theme.fontFaces]]
+family = "Source Code Pro"
+url = "https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+style = "normal"
+
+[theme]
+font = "Geist, sans-serif"
+codeFont = "GeistMono, 'Source Code Pro'"
+baseRadius = "0.5rem"
+
+
+[theme.sidebar]
+baseRadius = "small"
+
