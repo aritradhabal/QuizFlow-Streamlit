@@ -1,5 +1,6 @@
 import streamlit as st
 
+    
 def authenticated_menu():
     st.sidebar.page_link("Welcome.py", label=f"Welcome {st.user.given_name}",icon="👋")
     st.sidebar.page_link("pages/1_Topics.py", label="Topics → 🔖", icon="📚")

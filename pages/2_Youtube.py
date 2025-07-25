@@ -18,9 +18,10 @@ import uuid
 from yt_dlp.utils import DownloadError
 from authenticate import get_creds
 from database import inserting_, fetching_, buttons, fetching_curated, update_last_login
-
 from menu import menu_with_redirect
 menu_with_redirect()
+
+
 
 if "session_id" not in st.session_state:
     st.session_state.session_id = str(uuid.uuid4())[:8]
