@@ -206,6 +206,8 @@ else :
   def load_model():
       model = whisper.load_model("base")
       st.session_state.model_loaded = model
+      msg_model = st.toast("**Model Loaded Successfully!**", icon="✅")
+      msg_model.toast("**Downloading video may fail due to youtube restrictions.**", icon="⚠️")
       return st.session_state.model_loaded
   if selection == "Download :material/cloud_download:" and st.session_state.model_loaded == None:
     model = load_model()
