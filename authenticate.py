@@ -120,10 +120,13 @@ def google_token():
     else:
         now = time.time()
         user_token = st.session_state.user_token
-        if now > user_token['timestamp'] + 3300:
+        if now > user_token['timestamp'] + 3600:
             processed = user_token_google()
             if processed:
                 msg_toast.toast(f"Expired! Fetched New credentials for {st.user['given_name']}")
+        elif now > user_token['timestamp'] + 3300:
+            msg_toast.toast(f"Your session will expire in less than 5 minutes, please refresh!")
+            pass
         else:
             msg_toast.toast(f"Connected with {st.user['given_name']}'s Credentials")
     

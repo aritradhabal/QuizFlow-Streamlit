@@ -58,8 +58,8 @@ def legal():
                 position: fixed;
                 bottom: 0;
                 right: 0;
-                background-color: white;
-                color: black;
+                #background-color: white;
+                #color: black;
                 text-align: right;
                 padding: 10px;
                 box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
