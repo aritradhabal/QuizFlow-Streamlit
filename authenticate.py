@@ -9,8 +9,6 @@ from google.auth.exceptions import GoogleAuthError
 import google.auth.exceptions
 from googleapiclient.errors import HttpError
 
-
-
 DISCOVERY_DOC = "https://forms.googleapis.com/$discovery/rest?version=v1"
 
 domain = st.secrets['auth']['auth0']['domain']
@@ -75,7 +73,6 @@ def google_token():
         processed =  access_token_exp24()
         if processed:
             msg_toast.toast(f"Still Loading...")
-
     else:
         now = time.time()
         token_data = st.session_state.mg_token
@@ -120,13 +117,10 @@ def google_token():
     else:
         now = time.time()
         user_token = st.session_state.user_token
-        if now > user_token['timestamp'] + 3600:
+        if now > user_token['timestamp'] + 3300:
             processed = user_token_google()
             if processed:
                 msg_toast.toast(f"Expired! Fetched New credentials for {st.user['given_name']}")
-        elif now > user_token['timestamp'] + 3300:
-            msg_toast.toast(f"Your session will expire in less than 5 minutes, please refresh!")
-            pass
         else:
             msg_toast.toast(f"Connected with {st.user['given_name']}'s Credentials")
     
@@ -190,8 +184,6 @@ def creds_():
             st.logout()
             st.rerun()
         
-    # else :
-    #     st.toast(f"**Welcome Back {st.user['given_name']}!**")
     return st.session_state.cred
 
 def get_creds():
