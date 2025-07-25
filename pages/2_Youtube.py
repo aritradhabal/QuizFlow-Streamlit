@@ -18,20 +18,63 @@ import uuid
 from yt_dlp.utils import DownloadError
 from authenticate import get_creds
 from database import inserting_, fetching_, buttons, fetching_curated, update_last_login
-from menu import menu_with_redirect
-menu_with_redirect()
+from menu import menu_with_redirect,menu
+menu()
 
-
-
-if "session_id" not in st.session_state:
-    st.session_state.session_id = str(uuid.uuid4())[:8]
-    
+st.link_button("Go To Home", url="https://quizflow.me", type="secondary", icon="🏠")
+  
 st.set_page_config(
     page_title="QuizFlow.Ai",
     page_icon="📋",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
+
+if "session_id" not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())[:8]
+    
+if "query_value" not in st.session_state:
+  st.session_state.query_value = ""
+
+if "easy_qs_last" not in st.session_state:
+  st.session_state.easy_qs_last = None
+if "medium_qs_last" not in st.session_state:
+  st.session_state.medium_qs_last = None
+if "hard_qs_last" not in st.session_state:
+  st.session_state.hard_qs_last = None
+
+if "easy_qs_last_yt" not in st.session_state:
+  st.session_state.easy_qs_last_yt = None
+if "medium_qs_last_yt" not in st.session_state:
+  st.session_state.medium_qs_last_yt = None
+if "hard_qs_last_yt" not in st.session_state:
+  st.session_state.hard_qs_last_yt = None
+
+if "last_query_params" not in st.session_state:
+  st.session_state.last_query_params = None
+
+if st.query_params.get('url') is not None:
+
+    
+    st.session_state.query_value = st.query_params['url']
+
+    st.session_state.easy_qs_last = int(st.query_params.get('easy', 0))
+    st.session_state.easy_qs_last_yt = int(st.query_params.get('easy', 0))
+
+    st.session_state.medium_qs_last = int(st.query_params.get('medium', 0))
+    st.session_state.medium_qs_last_yt = int(st.query_params.get('medium', 0))
+
+    st.session_state.hard_qs_last = int(st.query_params.get('hard', 0))
+    st.session_state.hard_qs_last_yt = int(st.query_params.get('hard', 0))
+
+    if st.session_state.last_query_params is None or st.session_state.last_query_params != st.query_params:
+        st.session_state.last_query_params = st.query_params
+        msg_value = st.toast(f"**Loaded YouTube URL**", icon="✅")
+        time.sleep(0.5)
+        if st.user.is_logged_in == False:
+          msg_value.toast("**You need to login to proceed!**", icon="🔒")
+        time.sleep(1.5)
+        msg_value.empty()
 
 
 if st.user.is_logged_in != True:
@@ -134,12 +177,12 @@ else :
   if "last_url" not in st.session_state:
       st.session_state.last_url = ""
   # ------------- Numbers ---------------------#
-  if "easy_qs_last" not in st.session_state:
-    st.session_state.easy_qs_last = None
-  if "medium_qs_last" not in st.session_state:
-    st.session_state.medium_qs_last = None
-  if "hard_qs_last" not in st.session_state:
-    st.session_state.hard_qs_last = None
+  # if "easy_qs_last" not in st.session_state:
+  #   st.session_state.easy_qs_last = None
+  # if "medium_qs_last" not in st.session_state:
+  #   st.session_state.medium_qs_last = None
+  # if "hard_qs_last" not in st.session_state:
+  #   st.session_state.hard_qs_last = None
   if "easy_qs_num_last" not in st.session_state:
     st.session_state.easy_qs_num_last = None
   if "medium_qs_num_last" not in st.session_state:
@@ -148,12 +191,12 @@ else :
     st.session_state.hard_qs_num_last = None
 
 ############## NUMBERS FOR API ------
-  if "easy_qs_last_yt" not in st.session_state:
-    st.session_state.easy_qs_last_yt = None
-  if "medium_qs_last_yt" not in st.session_state:
-    st.session_state.medium_qs_last_yt = None
-  if "hard_qs_last_yt" not in st.session_state:
-    st.session_state.hard_qs_last_yt = None
+  # if "easy_qs_last_yt" not in st.session_state:
+  #   st.session_state.easy_qs_last_yt = None
+  # if "medium_qs_last_yt" not in st.session_state:
+  #   st.session_state.medium_qs_last_yt = None
+  # if "hard_qs_last_yt" not in st.session_state:
+  #   st.session_state.hard_qs_last_yt = None
   if "easy_qs_num_last_yt" not in st.session_state:
     st.session_state.easy_qs_num_last_yt = None
   if "medium_qs_num_last_yt" not in st.session_state:
@@ -179,18 +222,13 @@ else :
 
   if "selection_pills" not in st.session_state:
     st.session_state.selection_pills = "YouTube API :material/bolt:"
+    
   if "model_loaded" not in st.session_state:
     st.session_state.model_loaded = None
     
-  if "query_value" not in st.session_state:
-    st.session_state.query_value = "" 
-  
   if "changed" not in st.session_state:
     st.session_state.changed = False
-  
-  
-  if len(st.query_params) > 0:
-      st.session_state.query_value = st.query_params['url']
+ 
       
   ###########################################################################
   a,b = st.columns([5,2], vertical_alignment="center")
@@ -547,7 +585,7 @@ else :
                 key="e",
                 min_value=0,
                 max_value=20,
-                value=5,
+                value=st.session_state.easy_qs_last,
                 step=1,
             )
         with b:
@@ -556,7 +594,7 @@ else :
                 key="m",
                 min_value=0,
                 max_value=20,
-                value=6,
+                value= st.session_state.medium_qs_last,
                 step=1,
             )
         with c:
@@ -565,7 +603,7 @@ else :
                 key="h",
                 min_value=0,
                 max_value=20,
-                value=3,
+                value= st.session_state.hard_qs_last,
                 step=1,
             )
 
@@ -642,7 +680,7 @@ else :
               key="e",
               min_value=0,
               max_value=20,
-              value=5,
+              value=st.session_state.easy_qs_last_yt,
               step=1,
           )
       with b:
@@ -651,7 +689,7 @@ else :
               key="m",
               min_value=0,
               max_value=20,
-              value=6,
+              value= st.session_state.medium_qs_last_yt,
               step=1,
           )
       with c:
@@ -660,7 +698,7 @@ else :
               key="h",
               min_value=0,
               max_value=20,
-              value=3,
+              value=st.session_state.hard_qs_last_yt,
               step=1,
           )
 
@@ -714,5 +752,3 @@ else :
         st.markdown(f"### 📤 Share this Quiz: [{ResponderURL}]({ResponderURL})")
         st.markdown(f"### 📝 Edit Your Form: [https://docs.google.com/forms/d/{FormID}/edit](https://docs.google.com/forms/d/{FormID}/edit)")
         
-
-

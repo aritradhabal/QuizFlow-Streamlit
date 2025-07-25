@@ -2,7 +2,7 @@ import streamlit as st
 from authenticate import get_creds
 from database import fetching_, buttons, fetching_curated, update_last_login
 import time
-
+st.switch_page("pages/2_YouTube.py")
 from menu import menu
 menu()
     
