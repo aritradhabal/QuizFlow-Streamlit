@@ -5,7 +5,7 @@ import time
 
 from menu import menu
 menu()
-
+    
 st.set_page_config(
     page_title="QuizFlow.Ai",
     page_icon="📋",

@@ -34,7 +34,6 @@ st.set_page_config(
 )
 
 
-
 if st.user.is_logged_in != True:
   def login():
     st.login("auth0")

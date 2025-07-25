@@ -86,3 +86,5 @@ def update_last_login(email):
       data = supabase.table("Forms").update({"last_login": now}).eq("email", email).execute()
     elif now > prev.data[0]["last_login"]+3300:
       st.toast(f"**Your session will expire in less than 5 minutes! Make sure to save your work.**", icon="⚠️")
+
+      
