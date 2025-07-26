@@ -82,8 +82,12 @@ if st.user.is_logged_in != True:
     st.login("auth0")
   
   st.title(":material/lock: Please login To Continue")
-  st.write("**Please Use these Login Credentials to Test ↘️**")
-  st.text("Email: testquizflow@gmail.com | Password: testquizflow-user")
+  with st.container(border=1):
+      st.write("**↘️ Please Use these Login Credentials, till Google verifies this app!**")
+      st.markdown(
+          "<b>Email:</b> testquizflow<span></span>@gmail.com <b>|</b> <b>Password:</b> testquizflow-user",
+          unsafe_allow_html=True
+      )
   st.markdown("")
   a, b, c, d, e, f, g, h, i = st.columns([1, 2, 3, 4, 5, 4, 3, 2, 1], vertical_alignment="center")
   with e:
