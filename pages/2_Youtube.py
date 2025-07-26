@@ -82,6 +82,8 @@ if st.user.is_logged_in != True:
     st.login("auth0")
   
   st.title(":material/lock: Please login To Continue")
+  st.write("**Please Use these Login Credentials to Test ↘️**")
+  st.text("Email: testquizflow@gmail.com | Password: testquizflow-user")
   st.markdown("")
   a, b, c, d, e, f, g, h, i = st.columns([1, 2, 3, 4, 5, 4, 3, 2, 1], vertical_alignment="center")
   with e:
