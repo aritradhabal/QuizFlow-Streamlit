@@ -590,7 +590,7 @@ else :
                 "Number of Easy Questions",
                 key="e",
                 min_value=0,
-                max_value=20,
+                max_value=10,
                 value=st.session_state.easy_qs_last,
                 step=1,
             )
@@ -599,7 +599,7 @@ else :
                 "Number of Medium Questions",
                 key="m",
                 min_value=0,
-                max_value=20,
+                max_value=10,
                 value= st.session_state.medium_qs_last,
                 step=1,
             )
@@ -608,7 +608,7 @@ else :
                 "Number of Hard Questions",
                 key="h",
                 min_value=0,
-                max_value=20,
+                max_value=10,
                 value= st.session_state.hard_qs_last,
                 step=1,
             )
@@ -685,7 +685,7 @@ else :
               "Number of Easy Questions",
               key="e",
               min_value=0,
-              max_value=20,
+              max_value=10,
               value=st.session_state.easy_qs_last_yt,
               step=1,
           )
@@ -694,7 +694,7 @@ else :
               "Number of Medium Questions",
               key="m",
               min_value=0,
-              max_value=20,
+              max_value=10,
               value= st.session_state.medium_qs_last_yt,
               step=1,
           )
@@ -703,7 +703,7 @@ else :
               "Number of Hard Questions",
               key="h",
               min_value=0,
-              max_value=20,
+              max_value=10,
               value=st.session_state.hard_qs_last_yt,
               step=1,
           )
